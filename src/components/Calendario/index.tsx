@@ -1,10 +1,11 @@
 
 import React from 'react'
-import { IEvento } from '../../interfaces/IEvento';
 import style from './Calendario.module.scss';
 import ptBR from './localizacao/ptBR.json'
 import Kalend, { CalendarView } from 'kalend'
 import 'kalend/dist/styles/index.css';
+import { listaDeEventos } from '../../state/atom';
+import { useRecoilValue } from 'recoil';
 
 interface IKalendEvento {
   id?: number
@@ -14,7 +15,8 @@ interface IKalendEvento {
   color: string
 }
 
-const Calendario: React.FC<{ eventos: IEvento[] }> = ({ eventos }) => {
+const Calendario: React.FC = () => {
+  const eventos = useRecoilValue(listaDeEventos)
 
   const eventosKalend = new Map<string, IKalendEvento[]>();
 
